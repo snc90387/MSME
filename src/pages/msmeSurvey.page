@@ -1,0 +1,59 @@
+<apex:page controller="msmeControllerSurvey">
+<!--<apex:page standardController="survey__c">-->
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>WELCOME TO MSME FOR :</h1>
+  for building credit score for small businessman
+  
+  <apex:sectionHeader subtitle="subtitle:build MY credit history for everyone!" title="Title:MSME Survey"/>
+
+<apex:pageBlock >   
+   <apex:pageBlockButtons location="top" >
+   <apex:outputPanel id="myButtons">
+   <apex:form >
+        <apex:commandButton action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="myPanel,myButtons"/>
+        <apex:commandButton action="{!Previous}" title="Previous" value="<" disabled="{!disablePrevious}" reRender="myPanel,myButtons"/>        
+        <apex:commandButton action="{!Next}" title="Next" value=">" disabled="{!disableNext}" reRender="myPanel,myButtons"/>
+        <apex:commandButton action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="myPanel,myButtons"/>        
+   </apex:form>
+   </apex:outputPanel>
+   </apex:pageBlockButtons>
+   
+ 
+   
+   <apex:pageBlockSection title="SECTION :{!currentSection}" columns="2" showHeader="true">
+
+   <!-- /apex:pageBlockSection >
+
+   <apex:pageBlockSection collapsible="false" -->
+   <apex:pageblocksectionitem >
+     <apex:facet name="header">
+         <apex:outputText value="{!currentSection}"  />
+     </apex:facet>
+      <apex:outputPanel id="myPanel">
+           <apex:pageMessages id="theMessages" />
+           <apex:pageBlockTable value="{!questions}" var="qe" align="center">
+                <!-- apex:column value="{!qe.section__c}" /-->
+                <apex:column value="{!qe.QuestionText__c}" />
+                <apex:facet name="footer">Showing Question # {!pageNumber} of {!totalPages}</apex:facet>
+           </apex:pageBlockTable>
+       </apex:outputPanel> 
+       
+       <apex:outputPanel id="myPanelAnswers">
+           <apex:pageMessages id="theMessagesAnswers" />
+           <apex:pageBlockTable value="{!answers}" var="ans" align="center">
+                <apex:column value="{!ans.name}" />
+                <apex:column value="{!ans.Answer__c}" />
+                <!-- apex:facet name="footer">Showing Question # {!pageNumber} of {!totalPages}</apex:facet -->
+           </apex:pageBlockTable>
+       </apex:outputPanel>     
+   </apex:pageblocksectionitem>
+   
+      <apex:pageblocksectionitem >
+       
+       <apex:image url="{!$Resource.msme_demographic}" width="250" height="250"/>
+       
+   </apex:pageblocksectionitem>
+   
+   </apex:pageBlockSection>
+</apex:pageBlock> 
+</apex:page>
