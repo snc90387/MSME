@@ -4,7 +4,7 @@
   <h1>WELCOME TO MSME FOR :</h1>
   for building credit score for small businessman
   
-  <apex:sectionHeader subtitle="subtitle:build MY credit history for everyone!" title="Title:MSME Survey"/>
+  <apex:sectionHeader subtitle="subtitle:{!name}" title="Title:MSME Survey"/>
 
 <apex:pageBlock >   
    <apex:pageBlockButtons location="top" >
@@ -55,5 +55,6 @@
    </apex:pageblocksectionitem>
    
    </apex:pageBlockSection>
+   
 </apex:pageBlock> 
 </apex:page>

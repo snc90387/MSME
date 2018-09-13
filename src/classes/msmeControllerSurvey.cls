@@ -8,15 +8,32 @@ public with sharing class msmeControllerSurvey {
    QuestionInstance__c[] qis ;
    Answer__c[] answers;
    AnswerInstance__c[] ais;
-   
-   Map <id, List<AnswerInstance__c>> qiaisMap = new Map<id, List<AnswerInstance__c>>();
+
+  private Contact currentcontact = Null;
+
+    Map <id, List<AnswerInstance__c>> qiaisMap = new Map<id, List<AnswerInstance__c>>();
    
    //constructor
    public msmeControllerSurvey () {
          total_size = [select count() from Question__c]; //set the total size in the constructor
          //total_size = total_size + 1; // needed for limit = 1
          currentSection = 'demographic'; // default
-         
+    }
+    
+     public String getName() {
+         getContact();
+        return currentcontact.name;
+    }
+
+    public Contact getContact() {
+    if(currentcontact == Null){
+        
+         Id cId = ApexPages.currentPage().getParameters().get('id');
+         currentcontact = [select Id, Name from Contact where Id = '0036F00002bIOr7']; //:cId];
+         }
+         return currentcontact;
+    }
+
          // IMPORTANT NOTE:
          // Following code is moved to getQuestions()
          // if done in constructor then this is only one time at the creation
@@ -47,7 +64,7 @@ public with sharing class msmeControllerSurvey {
           ApexPages.addMessages(ee);  
       }
       ***/
-   }
+  
 
     
    public PageReference Beginning() { //user clicked beginning
@@ -86,7 +103,7 @@ public with sharing class msmeControllerSurvey {
    }
 
    public Integer getPageNumber() {
-      return counter/list_size ; // was +1
+      return (counter/list_size + 1) ; // was +1
    }
 
    public Integer getTotalPages() {
